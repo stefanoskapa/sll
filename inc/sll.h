@@ -32,4 +32,20 @@ void sll_free(sll *list);
  */
 int sll_addl(sll *list, int value);
 
+/**
+ * @brief Adds an element at the start of the list
+ *
+ * This function adds an element at the start of the list
+ * in constant time. (addFirst)
+ * @return 0 on success, -1 on failure
+ */
+int sll_addf(sll *list, int value);
+
+/**
+ * @brief Returns the list size
+ *
+ * @return list size
+ */
+int sll_size(sll *list);
+
 #endif 

@@ -43,6 +43,27 @@ int sll_addl(sll *list, int value) {
     return 0;
 }
 
+int sll_addf(sll *list, int value) {
+
+    sll_node *node = (sll_node*) malloc(sizeof(sll_node));
+    if (node == NULL) {
+        return -1;
+    }
+    *node = (sll_node){value, list->head};
+    
+    if (list->head == NULL) {
+        list->head = node;
+        list->tail = node; 
+    } else {
+        list->head = node;
+    }
+    list->size++;
+    return 0;
+}
+
+int sll_size(sll* list) {
+    return list->size;
+}
 
 void sll_free(sll *list) {
     sll_node *node = list->head;
