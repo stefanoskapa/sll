@@ -23,5 +23,13 @@ sll *sll_init();
  */
 void sll_free(sll *list);
 
+/**
+ * @brief Adds an element at the end of the list
+ *
+ * This function adds an element at the end of the list
+ * in constant time. (addLast)
+ * @return 0 on success, -1 on failure
+ */
+int sll_addl(sll *list, int value);
 
 #endif 
