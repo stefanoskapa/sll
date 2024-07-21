@@ -3,20 +3,20 @@ CFLAGS=-Wall -Wextra $(OPT) -g
 OPT=-O0
 
 LIBSRC=src/sll.c
-TESTSRC=src/test.c
 LIB=bin/sll.o
-TESTBIN=bin/test
+TESTSRC=src/test.c
+TEST=bin/test
 
 
-all: $(TESTBIN)
+all: $(TEST)
 
-$(TESTBIN):$(LIBOBJ) $(TESTSRC)
-	$(CC) $(CFLAGS) -o $(TESTBIN) $(LIBOBJ) $(TESTSRC)
+$(TEST):$(LIB) $(TESTSRC)
+	$(CC) $(CFLAGS) -o $(TEST) $(LIB) $(TESTSRC)
 
-$(LIBOBJ):$(LIBSRC)
-	$(CC) $(CFLAGS) -o $(LIB) $(LIBSRC)
+$(LIB):$(LIBSRC)
+	$(CC) $(CFLAGS) -c -o $(LIB) $(LIBSRC)
 
 test:
 	@bin/test
 clean:
-	@rm bin/*
+	@rm -f bin/*
