@@ -16,20 +16,16 @@ struct sll {
 
 
 sll *sll_init() {
-    
     sll *list = (sll*) malloc(sizeof(sll));
     if (list == NULL) {
         return NULL;
     }
-    list->head = NULL;
-    list->tail = NULL;
-    list->size = 0;
+    *list = (sll){NULL, NULL, 0};    
     return list;
-
 }
 
+
 void sll_free(sll *list) {
-    
     sll_node *node = list->head;
     sll_node *next;
     while(node != NULL) {
@@ -37,7 +33,5 @@ void sll_free(sll *list) {
         free(node);
         node = next; 
     }
-    
     free(list);
-
 }
