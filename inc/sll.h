@@ -13,4 +13,15 @@ typedef struct sll sll;
  */
 sll *sll_init();
 
+/**
+ * @brief Deallocates a linked list
+ *
+ * This function deallocates memory of an sll instance.
+ * To be used when the linked list is no longer needed. 
+ *
+ * @return void
+ */
+void sll_free(sll *list);
+
+
 #endif 

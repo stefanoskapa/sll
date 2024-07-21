@@ -27,14 +27,12 @@ int main(void) {
 
 
 /*
-
 TEST 1
 --------
 target: sll_init()
 
 Create an instance of sll and check
 if it has been initialized correctly
-
 */
 void test1() {
     testcase++;
@@ -44,7 +42,7 @@ void test1() {
         list->size != 0) {
         fail();
     }
-
+    sll_free(list);
 }
 
 void fail() {
