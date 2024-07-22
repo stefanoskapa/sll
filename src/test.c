@@ -2,15 +2,15 @@
 #include <stdlib.h>
 #include "../inc/sll.h"
 
-typedef struct sll_node {
+typedef struct Sll_node {
     int value;
-    struct sll_node *next;
-} sll_node;
+    struct Sll_node *next;
+} Sll_node;
 
-struct sll {
-    sll_node *head;
-    sll_node *tail;
-    int size;
+struct Sll {
+    Sll_node *head;
+    Sll_node *tail;
+    size_t size;
 };
 
 void fail();
@@ -19,6 +19,7 @@ void test2();
 void test3();
 void test4();
 void test5();
+void test6();
 
 int testcase = 0;
 
@@ -28,6 +29,7 @@ int main(void) {
     test3();
     test4();
     test5();
+    test6();
     printf("All %d tests passed!\n", testcase);
     return EXIT_SUCCESS;
 }
@@ -44,7 +46,7 @@ if it has been initialized correctly
 */
 void test1() {
     testcase++;
-    sll *list = sll_init();
+    Sll *list = sll_init();
     if (list->head != NULL ||
         list->tail != NULL ||
         list->size != 0) {
@@ -56,7 +58,7 @@ void test1() {
 /*
 TEST 2
 --------
-target: sll_addl
+target: sll_addLast
 
 Add an element at the end of the list
 and check if the size increased and
@@ -64,8 +66,8 @@ head and tail have been updated.
 */
 void test2() {
     testcase++;
-    sll *list = sll_init();
-    sll_addl(list, 1);
+    Sll *list = sll_init();
+    sll_addLast(list, 1);
     if (list->head == NULL ||
         list->tail == NULL ||
         list->size != 1) {
@@ -77,7 +79,7 @@ void test2() {
 /*
 TEST 3
 --------
-target: sll_addl
+target: sll_addLast
 
 Add three elements at the end of the list
 and check if the size increased and
@@ -86,10 +88,10 @@ are correct.
 */
 void test3() {
     testcase++;
-    sll *list = sll_init();
-    sll_addl(list, 1);
-    sll_addl(list, 2);
-    sll_addl(list, 3);
+    Sll *list = sll_init();
+    sll_addLast(list, 1);
+    sll_addLast(list, 2);
+    sll_addLast(list, 3);
     if (list->head == NULL ||
         list->tail == NULL ||
         list->size != 3    ||
@@ -105,7 +107,7 @@ void test3() {
 /*
 TEST 4
 --------
-target: sll_addf
+target: sll_addFirst
 
 Add an element at the start of the list
 and check if the size increased and
@@ -113,8 +115,8 @@ head and tail have been updated.
 */
 void test4() {
     testcase++;
-    sll *list = sll_init();
-    sll_addf(list, 1);
+    Sll *list = sll_init();
+    sll_addFirst(list, 1);
     if (list->head == NULL ||
         list->tail == NULL ||
         list->size != 1) {
@@ -126,7 +128,7 @@ void test4() {
 /*
 TEST 5
 --------
-target: sll_addf
+target: sll_addFirst
 
 Add three elements at the start of the list
 and check if the size increased and
@@ -135,10 +137,10 @@ are correct.
 */
 void test5() {
     testcase++;
-    sll *list = sll_init();
-    sll_addf(list, 1);
-    sll_addf(list, 2);
-    sll_addf(list, 3);
+    Sll *list = sll_init();
+    sll_addFirst(list, 1);
+    sll_addFirst(list, 2);
+    sll_addFirst(list, 3);
     if (list->head == NULL ||
         list->tail == NULL ||
         list->size != 3    ||
@@ -150,6 +152,38 @@ void test5() {
     }
     sll_free(list);
 }
+
+
+/*
+TEST 6
+--------
+target: sll_getAt
+
+Add three elements at the start of the list
+and check if they can be accessed by index.
+*/
+void test6() {
+    testcase++;
+    Sll *list = sll_init();
+    sll_addFirst(list, 1);
+    sll_addFirst(list, 2);
+    sll_addFirst(list, 3);
+
+    if (sll_getAt(list, 0) == NULL || *(sll_getAt(list, 0)) != 3) {
+        fail();
+    } 
+    
+    if (sll_getAt(list, 1) == NULL || *(sll_getAt(list, 1)) != 2) {
+        fail();
+    } 
+
+    if (sll_getAt(list, 2) == NULL || *(sll_getAt(list, 2)) != 1) {
+        fail();
+    } 
+
+    sll_free(list);
+}
+
 
 
 

@@ -2,35 +2,34 @@
 #include <stdlib.h>
 #include "../inc/sll.h"
 
-typedef struct sll_node {
+typedef struct Sll_node {
     int value;
-    struct sll_node *next;
-} sll_node;
+    struct Sll_node *next;
+} Sll_node;
 
-struct sll {
-    sll_node *head;
-    sll_node *tail;
-    int size;
+struct Sll {
+    Sll_node *head;
+    Sll_node *tail;
+    size_t size;
 };
 
 
-
-sll *sll_init() {
-    sll *list = (sll*) malloc(sizeof(sll));
+Sll *sll_init() {
+    Sll *list = (Sll*) malloc(sizeof(Sll));
     if (list == NULL) {
         return NULL;
     }
-    *list = (sll){NULL, NULL, 0};    
+    *list = (Sll){NULL, NULL, 0};    
     return list;
 }
 
-int sll_addl(sll *list, int value) {
+int sll_addLast(Sll *list, int value) {
 
-    sll_node *node = (sll_node*) malloc(sizeof(sll_node));
+    Sll_node *node = (Sll_node*) malloc(sizeof(Sll_node));
     if (node == NULL) {
         return -1;
     }
-    *node = (sll_node){value, NULL};
+    *node = (Sll_node){value, NULL};
     
     if (list->head == NULL) {
         list->head = node;
@@ -43,13 +42,13 @@ int sll_addl(sll *list, int value) {
     return 0;
 }
 
-int sll_addf(sll *list, int value) {
+int sll_addFirst(Sll *list, int value) {
 
-    sll_node *node = (sll_node*) malloc(sizeof(sll_node));
+    Sll_node *node = (Sll_node*) malloc(sizeof(Sll_node));
     if (node == NULL) {
         return -1;
     }
-    *node = (sll_node){value, list->head};
+    *node = (Sll_node){value, list->head};
     
     if (list->head == NULL) {
         list->head = node;
@@ -61,13 +60,31 @@ int sll_addf(sll *list, int value) {
     return 0;
 }
 
-int sll_size(sll* list) {
+int *sll_getAt(Sll *list, size_t index) {
+
+    if (index >= list->size) {
+        return NULL;
+    } 
+    
+    Sll_node *node = list->head;
+    for (size_t i = 0; i < index; i++) {
+        node = node->next;
+    }
+    
+    return &(node->value);
+    
+}
+
+
+
+
+int sll_size(Sll* list) {
     return list->size;
 }
 
-void sll_free(sll *list) {
-    sll_node *node = list->head;
-    sll_node *next;
+void sll_free(Sll *list) {
+    Sll_node *node = list->head;
+    Sll_node *next;
     while(node != NULL) {
         next = node->next;
         free(node);
